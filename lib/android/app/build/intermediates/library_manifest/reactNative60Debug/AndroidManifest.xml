@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wix.reactnativenotifications"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="27" />
+
+    <application>
+
+<!--          A proxy-service that gives the library an opportunity to do some work before launching/resuming the actual application task. -->
+        <service android:name="com.wix.reactnativenotifications.core.ProxyService" />
+
+        <receiver android:name="com.wix.reactnativenotifications.core.MyNotificationPublisher" />
+
+        <service android:name="com.wix.reactnativenotifications.fcm.FcmInstanceIdListenerService" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.wix.reactnativenotifications.fcm.FcmInstanceIdRefreshHandlerService"
+            android:exported="false" />
+    </application>
+
+</manifest>
